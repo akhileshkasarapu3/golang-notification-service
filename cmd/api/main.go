@@ -38,6 +38,7 @@ func main() {
 
 	http.HandleFunc("/health", healthHandler.Check)
 	http.HandleFunc("/notifications", notificationHandler.Create)
+	http.HandleFunc("/notifications/", notificationHandler.GetByID)
 
 	log.Println("API server running on :8080")
 	err = http.ListenAndServe(":8080", nil)
@@ -45,4 +46,3 @@ func main() {
 		log.Fatalf("failed to start server: %v", err)
 	}
 }
-

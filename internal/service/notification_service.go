@@ -13,6 +13,8 @@ type NotificationService struct {
 	NotificationRepository repository.NotificationRepository
 }
 
+
+// Create Service to handle missing fileld
 func (s NotificationService) CreateNotification(ctx context.Context, req model.CreateNotificationRequest) (int64, error) {
 	if strings.TrimSpace(req.RecipientEmail) == "" {
 		return 0, errors.New("recipient_email is required")
@@ -27,4 +29,14 @@ func (s NotificationService) CreateNotification(ctx context.Context, req model.C
 	}
 
 	return s.NotificationRepository.Create(ctx, req)
+}
+
+
+// Get Notification by ID
+func (s NotificationService) GetNotificationByID(ctx context.Context, id int64) (model.NotificationResponse, error) {
+	if id <= 0 {
+		return model.NotificationResponse{}, errors.New("id must be greater than 0")
+	}
+
+	return s.NotificationRepository.GetByID(ctx, id)
 }

@@ -39,3 +39,37 @@ func (r NotificationRepository) Create(ctx context.Context, req model.CreateNoti
 
 	return notificationID, nil
 }
+
+// Get By ID from the database
+func (r NotificationRepository) GetByID(ctx context.Context, id int64) (model.NotificationResponse, error) {
+	query := `
+		SELECT id, recipient_email, template_id, payload_json, status, error_message
+		FROM notifications
+		WHERE id = $1
+	`
+
+	var result model.NotificationResponse
+	var payloadBytes []byte
+
+	err := r.DB.QueryRowContext(ctx, query, id).Scan(
+		&result.ID,
+		&result.RecipientEmail,
+		&result.TemplateID,
+		&payloadBytes,
+		&result.Status,
+		&result.ErrorMessage,
+	)
+	if err != nil {
+		return model.NotificationResponse{}, err
+	}
+
+	err = json.Unmarshal(payloadBytes, &result.Payload)
+	if err != nil {
+		return model.NotificationResponse{}, err
+	}
+
+	return result, nil
+}
+
+
+

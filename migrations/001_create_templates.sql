@@ -6,3 +6,6 @@ CREATE TABLE IF NOT EXISTS templates (
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+
+

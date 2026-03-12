@@ -43,4 +43,3 @@ func NewPostgresConnection(cfg config.Config) (*sql.DB, error) {			// Uses ptr s
 	return database, nil	// this function is to connect to db by passing config details
 }
 
-

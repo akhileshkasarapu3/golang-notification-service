@@ -20,13 +20,11 @@ func Load()	Config {
 	}
 
 	cfg := Config {
-		PostgresDB: os.Getenv("POSTGRES_DB"),
-		PostgresUser:	os.Getenv("POSTGRES_USER"),
-		PostgresPassword: os.Getenv("POSTGRES_PASSWORD"),
-		PostgresPort: os.Getenv("POSTGRES_PORT"),
+		PostgresDB: 		os.Getenv("POSTGRES_DB"),
+		PostgresUser:		os.Getenv("POSTGRES_USER"),
+		PostgresPassword: 	os.Getenv("POSTGRES_PASSWORD"),
+		PostgresPort: 		os.Getenv("POSTGRES_PORT"),
 	}
 
 	return cfg     // Get the database variables
 }
-
-
